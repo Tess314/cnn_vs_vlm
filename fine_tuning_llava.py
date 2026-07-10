@@ -251,11 +251,11 @@ def evaluate_llava(model, processor, test_dataset, image_folder, max_new_tokens=
     label_list = [
         "basal cell carcinoma",
         "benign keratosis",
+        "dermatofibroma",
         "melanoma",
         "nevus",
         "solar or actinic keratosis",
         "squamous cell carcinoma",
-        "vascular lesion",
         "scar",
         "unknown"
     ]

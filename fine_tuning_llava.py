@@ -60,7 +60,7 @@ class LLavaDataCollator:
         """
         Args:
             processor: The multimodal processor (from AutoProcessor.from_pretrained()).
-            image_base_path: Folder where your training images (ISIC_*.jpg) are stored.
+            image_base_path: Folder where your training images are stored.
         """
         self.processor = processor
         self.image_base_path = image_base_path

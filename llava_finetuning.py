@@ -9,10 +9,7 @@ from peft import LoraConfig
 
 model_id = "llava-hf/llava-1.5-7b-hf"
 
-#"""
 quantization_config = BitsAndBytesConfig(
-    #load_in_2bit=True,
-    #bnb_2bit_compute_dtype=torch.float16,
     #same as Gemma
     load_in_4bit=True,
     bnb_4bit_use_double_quant=True,
@@ -20,19 +17,12 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_compute_dtype=torch.float16,
     bnb_4bit_quant_storage=torch.float16,
     bnb_4bit_use_nested_quant=True,
-    #load_in_6bit=True,
-    #bnb_6bit_compute_dtype=torch.float16,
-    #load_in_8bit=True,
-    #bnb_8bit_compute_dtype=torch.float16,
 )
-#"""
 
 model = LlavaForConditionalGeneration.from_pretrained(
     model_id,
     quantization_config=quantization_config,
-    #torch_dtype=torch.float16, #causes problems
     torch_dtype=torch.bfloat16,
-    #device_map="auto", #causes problems
 )
 
 """### Create a Chat template set `tokenizer` and `processor`"""
@@ -112,16 +102,16 @@ class LLavaDataCollator:
 
         return batch
 
-data_collator = LLavaDataCollator(processor, image_base_path="/users/tw4001/Documents/train")
+data_collator = LLavaDataCollator(processor, image_base_path="/Documents/train")
 
 """### Load the Dataset"""
 
 from datasets import load_dataset
 
 data_files = {
-    "train": "/users/tw4001/Documents/data_train_llava.jsonl",
-    "test": "/users/tw4001/Documents/data_val_llava.jsonl"
-    #"test": "/users/tw4001/Documents/nhs_val_llava.jsonl"
+    "train": "/Documents/data_train_llava.jsonl",
+    "test": "/Documents/data_val_llava.jsonl"
+    #"test": "/Documents/nhs_val_llava.jsonl"
 }
 
 dataset = load_dataset("json", data_files=data_files)
@@ -146,7 +136,7 @@ train_dataset = train_dataset.map(fix_prompts)
 eval_dataset = eval_dataset.map(fix_prompts)
 
 import os
-def add_image_paths(example, image_base_path="/users/tw4001/Documents/train"):
+def add_image_paths(example, image_base_path="/Documents/train"):
     images = []
     for message in example["messages"]:
         for content in message["content"]:
@@ -165,8 +155,6 @@ train_dataset[0]
 
 training_args = TrainingArguments(
     output_dir = "llava-finetuned",
-    #overwrite_output_dir=True,
-    #report_to="tensorboard",
     learning_rate=0.0002, 
     per_device_train_batch_size=2,
     gradient_accumulation_steps=4, 

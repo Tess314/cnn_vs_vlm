@@ -51,7 +51,7 @@ processor.tokenizer = tokenizer
 """### Create a `DataCollator`"""
 
 class LLavaDataCollator:
-    def __init__(self, processor, image_base_path="/users/tw4001/Documents/train"):
+    def __init__(self, processor, image_base_path="/Documents/train"):
         """
         Args:
             processor: The multimodal processor (from AutoProcessor.from_pretrained()).

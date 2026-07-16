@@ -1,0 +1,2 @@
+{"id": "val_00000", "messages": [{"role": "user", "content": [{"type": "text", "text": "Classify the lesions based on the provided <LABEL> and image."}, {"type": "image", "image_url": "mel.jpg"}]}, {"role": "assistant", "content": [{"type": "text", "text": "melanoma"}]}]}
+{"id": "val_00001", "messages": [{"role": "user", "content": [{"type": "text", "text": "Classify the lesions based on the provided <LABEL> and image."}, {"type": "image", "image_url": "nv.jpg"}]}, {"role": "assistant", "content": [{"type": "text", "text": "nevus"}]}]}

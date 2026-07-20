@@ -10,7 +10,6 @@ from peft import LoraConfig
 model_id = "llava-hf/llava-1.5-7b-hf"
 
 quantization_config = BitsAndBytesConfig(
-    #same as Gemma
     load_in_4bit=True,
     bnb_4bit_use_double_quant=True,
     bnb_4bit_quant_type="nf4",
